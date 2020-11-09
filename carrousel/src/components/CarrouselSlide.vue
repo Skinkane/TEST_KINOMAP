@@ -25,11 +25,11 @@ export default {
 <style>
 
 .slide-enter-active{
-    animation: slideIn 5s;
+    animation: slideIn 2s;
 }
 
 .slide-leave-active{
-    animation: slideOut 5s;
+    animation: slideOut 2s;
     position: absolute;
     top: 0;
     left: 0;
@@ -41,7 +41,7 @@ export default {
 }
 
 @keyframes slideOut {
-    from {transform: translateX(0); }
+    from {transform: translateX(250%); }
     to {transform: translateX(-100%); }
 }
 </style>
