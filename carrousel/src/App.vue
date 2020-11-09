@@ -1,17 +1,26 @@
 <template>
   <div id="app">
     <img alt="Kinomap logo" src="./assets/logo.png">
-    <Carrousel />
+    <carrousel>
+      <carrousel-slide>
+        <img src="http://62.210.247.201:9000/reebok.png">
+      </carrousel-slide>
+      <carrousel-slide>
+         <img src="http://62.210.247.201:9000/Hammer.png">
+      </carrousel-slide>
+    </carrousel>
   </div>
 </template>
 
 <script>
 import Carrousel from './components/Carrousel.vue'
+import CarrouselSlide from './components/CarrouselSlide.vue'
 
 export default {
   name: 'App',
   components: {
-    Carrousel
+    Carrousel,
+    CarrouselSlide
   }
 }
 </script>

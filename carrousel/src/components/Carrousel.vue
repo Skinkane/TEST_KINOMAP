@@ -1,8 +1,8 @@
 <template>
     <div class="carousel">
-        <div>
-            <carousel :data="data" :indicators="false"></carousel>
-        </div>
+        <slot></slot>
+        <button class="carrousel_nav carrousel_prev" @click.prevent="prev"></button>
+        <button class="carrousel_nav carrousel_next" @click.prevent="next"></button>
     </div>
 </template>
 
@@ -11,18 +11,12 @@ import axios from 'axios'
 
 export default {
   name: 'Carrousel',
-  components: {
-  }, 
-   data: () => {
+  data () {
+    console.log(this.$children)
     return {
-        data: [
-          '<div class="example-slide">Slide 1</div>',
-          '<div class="example-slide">Slide 2</div>',
-          '<div class="example-slide">Slide 3</div>',
-        ],
-        images : null,
-        imageIndex: 0
-    }
+        index: 0,
+        slides: []
+    }   
   },
   mounted () {
     axios
@@ -31,26 +25,28 @@ export default {
       .catch(error => {
         console.log(error)
         this.errored = true})
+    this.slides = this.$children
+    this.slides.forEach((slide, i) => {
+      slide.index = i
+    })
   },
+
+  computed: {
+    slidesCount () { return this.slides.length}
+  },
+
   methods: {
-    getImage(name){
-        this.image = 'http://62.210.247.201:9000/'+name+'.png'
+    next (){
+      this.index++
+      if(this.index >= this.slidesCount) {
+        this.index = 0
+      }
     },
-    getNextImage(){
-        if(this.imageIndex > this.list.length){
-            this.imageIndex = 0;
-        }
-        else{
-            this.imageIndex ++;
-        }
-    },
-    getPreviewImage(){
-        if(this.imageIndex < 0){
-            this.imageIndex = this.list.length;
-        }
-        else{
-            this.imageIndex --;
-        }
+    prev (){
+      this.index--
+      if(this.index < 0) {
+        this.index  = this.slidesCount - 1
+      }
     }
   }
 }
@@ -64,5 +60,24 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+
+.carrousel {
+  position: relative;
+}
+
+.carrousel_nav {
+  position : absolute;
+  top : 50%;
+  left: 10px;
+  background: url(../assets/prev.png);
+  width: 312px;
+  height: 312px;
+}
+
+.carrousel_nav.carrousel_next{
+  right: 10px;
+  left: auto;
+  background-image: url(../assets/next.png)
 }
 </style>
