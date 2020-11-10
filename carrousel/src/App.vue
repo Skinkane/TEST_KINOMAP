@@ -1,30 +1,28 @@
 <template>
-  <div>
-    <carrousel>
-      <carrousel-slide>
-        <div id=app>
-          <img src="http://62.210.247.201:9000/reebok.png">
-        </div>
-      </carrousel-slide>
-      <carrousel-slide>
-         <div id=app>
-          <img src="http://62.210.247.201:9000/Hammer.png">
-        </div>
-      </carrousel-slide>
-    </carrousel>
+  <div id='app'>
+    <b-carousel ref="myCarousel" id="carousel-1" v-model="slide" :interval="4000" controls indicators background="#ababab" img-width="220" img-height="100" style="text-shadow: 1px 1px 2px #333;" @sliding-start="onSlideStart" @sliding-end="onSlideEnd">
+      <b-carousel-slide img-src="http://62.210.247.201:9000/BTWIN.png"></b-carousel-slide>
+      <b-carousel-slide img-src="http://62.210.247.201:9000/adidas.png"></b-carousel-slide>
+      <b-carousel-slide img-src="http://62.210.247.201:9000/bhfitness.png"></b-carousel-slide>
+      <b-carousel-slide img-src="http://62.210.247.201:9000/domyos.png"></b-carousel-slide>
+    </b-carousel>
   </div>
 </template>
 
 <script>
 import axios from 'axios'
-import Carrousel from './components/Carrousel.vue'
-import CarrouselSlide from './components/CarrouselSlide.vue'
 
 export default {
   name: 'App',
   components: {
-    Carrousel,
-    CarrouselSlide
+  },
+  data() {
+      return {
+        slide: 0,
+        sliding: null
+      }
+    },
+  methods: {
   },
   mounted () {
     axios
@@ -36,14 +34,9 @@ export default {
     }
 }
 </script>
-
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+  #app{
+    width: 50%;
+    display: center;
+  }
 </style>
