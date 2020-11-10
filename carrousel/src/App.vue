@@ -4,9 +4,9 @@
       <img src="./assets/logo.png">
     </div>
     <div class="row justify-content-center top-buffer">
-      <b-carousel ref="myCarousel" id="carousel-1" v-model="slide" :interval="2000" controls indicators background="#fff" img-width="1024" img-height="1024" style="text-shadow: 1px 1px 2px #333;">
+      <b-carousel ref="myCarousel" id="carousel-1" v-model="slide" :interval="2000" controls indicators background="#fff" style="text-shadow: 1px 1px 2px #333;">
         <div  v-for="image in images" :key="image.image">
-          <b-carousel-slide class="zoom" v-bind:img-src="image.image"></b-carousel-slide>
+          <b-carousel-slide class="zoom max" v-bind:img-src="image.image"></b-carousel-slide>
         </div>
       </b-carousel>
     </div>
@@ -28,6 +28,7 @@ export default {
   data: function() {
       return {
         images: [],
+        src: [],
         slide: 0,
         sliding: null
       }
@@ -39,10 +40,10 @@ export default {
           for(var i = 0; i < 13; i++){
             for(var j = 0; j < this.images[i].weight -1; j++){
               this.images.push(this.images[i])
+              this.images = shuffle(this.images)
             }
           }
-          shuffle(this.images)
-        }).catch(error => {console.log(error)});
+        }).catch(error => {console.log(error)})
     }
   }
 }
@@ -63,5 +64,10 @@ export default {
 
 .top-buffer { 
  padding-top:30px; 
+}
+
+.max {
+  width: auto;
+  height: 150px;
 }
 </style>
