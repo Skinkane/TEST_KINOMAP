@@ -1,17 +1,18 @@
 <template>
-  <div id='app'>
-    <div class="d-flex justify-content-center">
+  <div id='app' class="container-fluid">
+    <div class="row justify-content-center top-buffer">
       <img src="./assets/logo.png">
     </div>
-    <div>
-      {{images}}
+    <div class="row justify-content-center top-buffer">
+      <b-carousel ref="myCarousel" id="carousel-1" v-model="slide" :interval="2000" controls indicators background="#fff" img-width="1024" img-height="1024" style="text-shadow: 1px 1px 2px #333;">
+        <div  v-for="image in images" :key="image.image">
+          <b-carousel-slide class="zoom" v-bind:img-src="image.image"></b-carousel-slide>
+        </div>
+      </b-carousel>
     </div>
-    <b-carousel class="justify-content-center w-25 p-3 d-flex" ref="myCarousel" id="carousel-1" v-model="slide" :interval="2000" controls indicators background="#fff" img-width="1024" img-height="1024" style="text-shadow: 1px 1px 2px #333;">
-      <div  v-for="image in images" :key="image.image">
-        <b-carousel-slide class="zoom" v-bind:img-src="image.image"></b-carousel-slide>
-      </div>
-    </b-carousel>
-    <p class="d-flex justify-content-center">Par Gautier Couture</p>
+    <div class="row justify-content-center top-buffer">
+      <p>Par Gautier Couture</p>
+    </div>
   </div>
 </template>
 
@@ -33,15 +34,17 @@ export default {
     },
     methods: {
       getApi() { 
-        axios.get('http://62.210.247.201:9000/test').then(response => (this.images = response.data)).catch(error => {console.log(error)});
-        for(var i = 0; i < 13; i++){
-          for(var j = 0; j < this.images[i].weight; j++){
-            this.images.push(this.images[i])
+        axios.get('http://62.210.247.201:9000/test').then(response =>{
+          this.images = response.data
+          for(var i = 0; i < 13; i++){
+            for(var j = 0; j < this.images[i].weight -1; j++){
+              this.images.push(this.images[i])
+            }
           }
-        }
-        shuffle(this.images)
-      }
+          shuffle(this.images)
+        }).catch(error => {console.log(error)});
     }
+  }
 }
 </script>
 <style>
@@ -56,5 +59,9 @@ export default {
 
 .zoom:hover {
   transform: scale(1.5); 
+}
+
+.top-buffer { 
+ padding-top:30px; 
 }
 </style>
