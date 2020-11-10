@@ -1,10 +1,7 @@
 import Vue from 'vue'
 import App from './App.vue'
-// plugins
 import BootstrapVue from 'bootstrap-vue'
 Vue.use(BootstrapVue);
-
-// bootstrap
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 
