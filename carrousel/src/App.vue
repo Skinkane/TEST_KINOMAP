@@ -6,7 +6,7 @@
     <div class="row justify-content-center top-buffer">
       <b-carousel ref="myCarousel" id="carousel-1" v-model="slide" :interval="2000" controls indicators background="#fff" style="text-shadow: 1px 1px 2px #333;">
         <div  v-for="image in images" :key="image.image">
-          <b-carousel-slide class="zoom max" v-bind:img-src="image.image"></b-carousel-slide>
+          <b-carousel-slide class="zoom" v-bind:img-src="image.image"></b-carousel-slide>
         </div>
       </b-carousel>
     </div>
@@ -66,8 +66,4 @@ export default {
  padding-top:30px; 
 }
 
-.max {
-  width: auto;
-  height: 150px;
-}
 </style>
